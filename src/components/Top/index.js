@@ -1,12 +1,12 @@
 import React from 'react';
-import {Icon} from 'antd';
-import styles from './index.less';
-// import IconFont from '../../assets/IconFont';
 
-const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1576120_miv0h5o6fsi.js',   //阿里巴巴图标引用地址
-    // scriptUrl: 'https://at.alicdn.com/t/font_1576120_dzoxyrpn9dg.js'
-});
+import styles from './index.less';
+// import {Icon} from 'antd';
+import IconFont from '@/assets/IconFont';
+
+// const IconFont = Icon.createFromIconfontCN({
+//     scriptUrl: '//at.alicdn.com/t/font_1576120_miv0h5o6fsi.js'
+// });
 
 function Top(params) {
     return (
