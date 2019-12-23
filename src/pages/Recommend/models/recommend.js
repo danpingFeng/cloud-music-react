@@ -4,7 +4,7 @@ import {getBannerList, getRecommendList} from '@/services/recommend';
 export default {
     namespace: 'recommend',
     state: {
-        banenrList: [],
+        bannerList: [],
         recommendList: []
     },
     effects: {
@@ -12,14 +12,14 @@ export default {
             const response = yield call(getBannerList);
             yield put({
                 type: 'saveBannerList',
-                payload: Array.isArray(response) ? response : [],
+                payload: Array.isArray(response.banners) ? response.banners : [],
             });
         },
         *fetchRecommendList(_, {call, put}) {
             const response = yield call(getRecommendList);
             yield put({
                 type: 'saveRecommendList',
-                payload: Array.isArray(response) ? response : [],
+                payload: Array.isArray(response.result) ? response.result : [],
             });
         },
     },
@@ -28,7 +28,7 @@ export default {
         saveBannerList(state, action) {
             return {
                 ...state,
-                banenrList: action.payload,
+                bannerList: action.payload,
             };
         },
         saveRecommendList(state, action) {
