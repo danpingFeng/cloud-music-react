@@ -8,9 +8,9 @@ export default {
       antd: false,
       dva: false,
       dynamicImport: false,
-      title: 'cloud-music-react2',
+      title: 'cloud-music-react',
       dll: false,
-      
+
       routes: {
         exclude: [
           /components\//,
