@@ -11,7 +11,9 @@
     "better-scroll": "^2.0.0-beta.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "swiper": "^5.2.1"
+    "swiper": "^5.2.1",
+    "umi-request": "^1.2.15",
+    "umi-router": "^0.1.2"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
