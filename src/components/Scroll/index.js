@@ -1,7 +1,7 @@
 import React, {forwardRef, useState, useEffect, useRef, useImperativeHandle, useMemo} from 'react';
 import PropTypes from 'prop-types';
 import BScroll from 'better-scroll';
-import {debounce} from '@/utils/index';
+import {debounce} from '@/utils/utils';
 import styles from './index.less';
 
 const Scroll = forwardRef(
@@ -18,7 +18,6 @@ const Scroll = forwardRef(
         let pullDownDebounce = useMemo(() => {
             return debounce(pullDown, 300);
         }, [pullDown]);
-
 
         useEffect(() => {
             const scroll = new BScroll(scrollContaninerRef.current, {
@@ -37,6 +36,7 @@ const Scroll = forwardRef(
                 setBScroll(null);
             }
         }, []);
+
         // 给实例绑定 scroll 事件，
         useEffect(() => {
             if (!bScroll || !onScroll) return;

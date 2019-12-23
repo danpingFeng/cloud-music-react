@@ -5,7 +5,7 @@ import styled from 'styled-components';
 // import Loading from '../loading/index';
 // import Loading2 from '../loading-v2/index';
 // import {debounce} from "../../api/utils";
-import {debounce} from '@/utils/index';
+import {debounce} from '@/utils/utils';
 import styles from './index.less';
 
 const Scroll = forwardRef((props, ref) => {

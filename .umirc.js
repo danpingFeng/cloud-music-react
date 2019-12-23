@@ -6,7 +6,7 @@ export default {
     // ref: https://umijs.org/plugin/umi-plugin-react.html
     ['umi-plugin-react', {
       antd: false,
-      dva: false,
+      dva: true,
       dynamicImport: false,
       title: 'cloud-music-react',
       dll: false,

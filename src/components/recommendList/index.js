@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './index.less'
-import {getCount} from '@/utils/index'
+import {getCount} from '@/utils/utils'
 // import IconFont from '@/assets/IconFont';
 
 import {Icon} from 'antd';
