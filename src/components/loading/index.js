@@ -1,11 +1,5 @@
 import React from 'react';
-
-import {Icon} from 'antd';
-// import IconFont from '@/assets/IconFont';
-
-const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1576120_koiklnjmlm.js'
-});
+import IconFont from '@/assets/IconFont';
 
 function Loading(params) {
     return (
