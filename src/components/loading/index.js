@@ -9,5 +9,4 @@ function Loading(params) {
         </div>
     )
 }
-
 export default React.memo(Loading);

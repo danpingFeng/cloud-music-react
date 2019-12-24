@@ -1,19 +1,26 @@
-.title {
-    font-weight: 700;
-    padding-left: 6px;
-    font-size: 14px;
-    line-height: 40px;
-    // color: #d44439;
-    text-align: left;
-}
-
-.listWrapper {
+import styled from 'styled-components';
+export const ListWrapper = styled.div`
+    .title {
+        font-weight: 700;
+        padding-left: 6px;
+        font-size: 14px;
+        line-height: 40px;
+        // color: #d44439;
+        text-align: left;
+    }
+`
+export const List = styled.div`
     display: flex;
     flex-wrap: wrap;
     background: pink;
     justify-content: space-around;
+`
 
-    .imgWrapper {
+export const ListItem = styled.div`
+    width: 32%;
+    position: relative;
+
+    .img-wrapper {
         img {
             border-radius: 6px;
         }
@@ -26,11 +33,6 @@
             border-radius: 3px;
             background: linear-gradient(rgba(0,0%,43%,.4), rgba(0,0%,100%,0));
         }
-    }
-
-    .itemWrapper {
-        width: 32%;
-        position: relative;
     }
 
     .playCount {
@@ -57,11 +59,6 @@
         margin-bottom: 20px;
         text-align: left;
 
-        // white-space: nowrap;
-        // overflow: hidden;
-        // text-overflow: ellipsis;
-
-
         overflow: hidden;  /** 隐藏超出的内容 **/
         word-break: break-all;
         text-overflow: ellipsis; /** 多行 **/
@@ -69,6 +66,5 @@
         -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
         -webkit-line-clamp: 2; /** 显示的行数 **/
     }
-}
 
-
+`
