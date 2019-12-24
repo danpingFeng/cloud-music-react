@@ -48,6 +48,7 @@ export const ListItem = styled.div`
             color: #fff;
             font-weight: 400;
             letter-spacing: 1px;
+            margin-left: 2px;
         }
     }
 

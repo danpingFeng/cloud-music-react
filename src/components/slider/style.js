@@ -8,7 +8,7 @@ export const SliderContainer = styled.div`
   .before {
     position: absolute;
     top: -300px;
-    height: 460px;
+    height: 420px;
     width: 100%;
     z-index: 1;
     background: ${style["theme-color"]};
