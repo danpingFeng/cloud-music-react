@@ -1,11 +1,13 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, Suspense} from 'react';
 import {connect} from 'dva';
 import Slider from '@/components/slider';
-import RecommendList from '@/components/recommendList';
 import styles from './index.less';
-import Scroll from '@/components/Scroll';
-import {forceCheck} from 'react-lazyload';
 
+import {forceCheck} from 'react-lazyload';
+import Loading from '../../components/loading';
+
+const Scroll = React.lazy(() => import('@/components/Scroll'));
+const RecommendList = React.lazy(() => import('@/components/recommendList'));
 
 function Recommend({dispatch, recommend}) {
     // const bannerList = [1, 2, 3, 4].map(item => {
@@ -33,13 +35,17 @@ function Recommend({dispatch, recommend}) {
 
     return (
         <div className={styles.content}>
-            {/* todo: 滑动加载效果待验证 */}
-            <Scroll className="list" onScroll={forceCheck}>
-                <div>
-                    <Slider bannerList={recommend.bannerList}></Slider>
-                    <RecommendList recommendList={recommend.recommendList}></RecommendList>
-                </div>
-            </Scroll>
+            <Suspense fallback={<Loading />}>
+                {/* todo: 下拉加载图片 待验证 */}
+                <Scroll className="list" onScroll={forceCheck}>
+                    <div>
+                        <Slider bannerList={recommend.bannerList}></Slider>
+                        <Suspense fallback={<Loading />}>
+                            <RecommendList recommendList={recommend.recommendList}></RecommendList>
+                        </Suspense>
+                    </div>
+                </Scroll>
+            </Suspense>
         </div>
     );
 }
@@ -48,9 +54,3 @@ function Recommend({dispatch, recommend}) {
 export default connect(({recommend}) => ({
     recommend,
 }))(React.memo(Recommend));
-
-// export default connect(({recommend}) => ({
-//     recommend: recommend,
-// }))(Recommend);
-
-// export default React.memo(Recommend)
