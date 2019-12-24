@@ -4,7 +4,7 @@ import {notification} from 'antd';
 import router from 'umi/router';
 
 // export const baseUrl = "http://localhost:3300";
-export const baseUrl = "http://192.168.0.103:3300";
+export const baseUrl = "http://172.24.164.236:3300";
 
 const codeMessage = {
     200: '服务器成功返回请求的数据。',
@@ -62,7 +62,7 @@ const request = extend({
         'Content-Type': 'multipart/form-data'
     },
     errorHandler,
-    credentials: 'include'
+    // credentials: 'include'
 });
 
 export default request;

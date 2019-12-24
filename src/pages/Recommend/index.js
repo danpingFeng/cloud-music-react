@@ -4,6 +4,7 @@ import Slider from '@/components/slider';
 import RecommendList from '@/components/recommendList';
 import styles from './index.less';
 import Scroll from '@/components/Scroll';
+import {forceCheck} from 'react-lazyload';
 
 
 function Recommend({dispatch, recommend}) {
@@ -32,7 +33,8 @@ function Recommend({dispatch, recommend}) {
 
     return (
         <div className={styles.content}>
-            <Scroll className="list">
+            {/* todo: 滑动加载效果待验证 */}
+            <Scroll className="list" onScroll={forceCheck}>
                 <div>
                     <Slider bannerList={recommend.bannerList}></Slider>
                     <RecommendList recommendList={recommend.recommendList}></RecommendList>
