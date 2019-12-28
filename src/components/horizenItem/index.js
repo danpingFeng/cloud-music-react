@@ -1,7 +1,6 @@
 import React, {useState, useRef, useEffect, memo} from 'react';
 import styled from 'styled-components';
 import Scroll from '../Scroll/index';
-import {PropTypes} from 'prop-types';
 import style from '../../assets/global-style';
 
 const List = styled.div`
@@ -23,21 +22,35 @@ const List = styled.div`
 const ListItem = styled.span`
     flex: 0 0 auto;
     padding: 5px 8px;
+    font-size: ${style["font-size-m"]};
     border-radius: 10px;
-
-    .selected {
+    &.selected {
+        color: ${style["theme-color"]};
         border: 1px solid ${style["theme-color"]};
         opacity: 0.8;
     }
 `
 
+
 function Horizen(props) {
     const {list, oldVal, title} = props;
     const {handleClick} = props;
 
+    const Category = useRef(null);
+
+    useEffect(() => {
+        let categoryDom = Category.current;
+        let tagElems = categoryDom.querySelectorAll("span");
+        let totalWidth = 0;
+        Array.from(tagElems).forEach(ele => {
+            totalWidth += ele.offsetWidth;
+        });
+        categoryDom.style.width = `${totalWidth}px`;
+    }, [])
+
     return (
         <Scroll direction="horizental">
-            <div>
+            <div ref={Category}>
                 <List>
                     <span className="title">{title}</span>
                     {
@@ -63,15 +76,11 @@ function Horizen(props) {
 //handleClick 为点击不同的 item 执行的方法
 Horizen.defaultProps = {
     list: [],
-    oldVal: '',
-    title: '',
     handleClick: null
 };
 
 Horizen.propTypes = {
-    list: PropTypes.array,
-    oldVal: PropTypes.string,
-    title: propTypes.string,
-    handleClick: PropTypes.func
+    // list: PropTypes.array,
+    // handleClick: PropTypes.func
 }
-
+export default React.memo(Horizen);
