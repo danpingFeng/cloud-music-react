@@ -35,9 +35,7 @@ const ListItem = styled.span`
 function Horizen(props) {
     const {list, oldVal, title} = props;
     const {handleClick} = props;
-
     const Category = useRef(null);
-
     useEffect(() => {
         let categoryDom = Category.current;
         let tagElems = categoryDom.querySelectorAll("span");
