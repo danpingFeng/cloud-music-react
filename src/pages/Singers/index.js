@@ -8,21 +8,10 @@ import Loading from '@/components/loading';
 import LazyLoad, {forceCheck} from 'react-lazyload';
 import router from 'umi/router';
 
-
 const Scroll = React.lazy(() => import('@/components/Scroll'));
 
 function Singers({dispatch, singers}) {
-    let [category, setCategory] = useState('');
-    let [alpha, setAlpha] = useState('');
-
     const scrollRef = useRef(null);
-    let handleUpdateCategory = id => {
-        setCategory(id);
-    }
-
-    let handleUpdateAlpha = alpha => {
-        setAlpha(alpha);
-    }
 
     useEffect(() => {
         // 请求热门歌手列表
@@ -32,38 +21,115 @@ function Singers({dispatch, singers}) {
         })
 
         // 请求全部歌手列表
-        dispatch({
-            type: 'singers/fetchSingersList',
-            payload: {category, alpha, count: 0}
-        })
+        // dispatch({
+        //     type: 'singers/fetchSingersList',
+        //     payload: {category: singers.category, alpha: singers.alpha, listOffset: 0}
+        // })
     }, []);
 
-    // const enterDeatil = id => {
-    //     router.push(`/singers/${id}`);
-    // }
+    const enterDeatil = id => {
+        router.push(`/singers/${id}`);
+    }
+    // 滑到最底部刷新部分的处理
+    const handlePullUp = () => {
+        dispatch({
+            type: 'singers/setPullUpLoading'
+        });
+        const {category, alpha, listOffset} = singers;
 
-    // const handlePullUp = () => {
-    //     pullUpRefresh(category === '', pageCount);
-    // }
+        // 表示是热门歌手
+        if (category === '') {
+            dispatch({
+                type: 'singers/fetchMoreHotSingersList',
+                payload: {
+                    offset: singers.offset
+                }
+            })
+        } else {
+            dispatch({
+                type: 'singers/fetchMoreSingersList',
+                payload: {category, alpha, listOffset}
+            })
+        }
+    }
+    // 顶部下拉刷新
+    const handlePullDown = () => {
+        dispatch({
+            type: 'singers/setPullDownLoading'
+        });
 
-    // const handlePullDown = () => {
-    //     pullDownRefresh(cateory, pageCount);
-    // }
+        dispatch({
+            type: 'singers/setListOffset',
+            payload: 0
+        });
 
-    // const handleUpdateCategory = newVal => {
-    //     if (category === newVal) return;
-    //     // updateCategory(newVal);
-    //     dispatch({
-    //         type: 'singers/setCategory'
-    //     })
+        // 表示是热门歌手
+        if (singers.category === '' && singers.alpha === '') {
+            dispatch({
+                type: 'singers/fetchHotSingersList',
+                payload: 0
+            })
+        } else {
+            const {category, alpha, listOffset} = singers;
+            dispatch({
+                type: 'singers/fetchMoreSingersList',
+                payload: {category, alpha, listOffset}
+            })
+        }
+    }
 
-    //     scrollRef.current.refresh();
-    // }
-    // const handleUpdateAlpha = newVal => {
-    //     if (alpha === newVal) return;
-    //     updateAlpha(newVal);
-    //     scrollRef.current.refresh();
-    // }
+    const handleUpdateCategory = newVal => {
+        if (category === newVal) return;
+        dispatch({
+            type: 'singers/setCategory',
+            payload: newVal
+        });
+
+        dispatch({
+            type: 'singers/setListOffset',
+            payload: 0
+        });
+
+        dispatch({
+            type: 'singers/setEnterLoading',
+            payload: true
+        })
+
+        const {category, alpha, listOffset} = singers;
+        // 请求全部歌手列表
+        dispatch({
+            type: 'singers/fetchSingersList',
+            payload: {category, alpha, listOffset}
+        })
+
+        scrollRef.current.refresh();
+    }
+    const handleUpdateAlpha = newVal => {
+        if (alpha === newVal) return;
+        dispatch({
+            type: 'singers/setAlpha',
+            payload: newVal
+        });
+
+        dispatch({
+            type: 'singers/setListOffset',
+            payload: 0
+        });
+
+        dispatch({
+            type: 'singers/setEnterLoading',
+            payload: true
+        })
+
+        const {category, alpha, listOffset} = singers;
+        // 请求全部歌手列表
+        dispatch({
+            type: 'singers/fetchSingersList',
+            payload: {category, alpha, listOffset}
+        })
+
+        scrollRef.current.refresh();
+    }
 
     const renderSingerList = () => {
         return (
@@ -88,16 +154,16 @@ function Singers({dispatch, singers}) {
 
     return (
         <NavContainer>
-            <Horizen list={categoryTypes} title={"分类(默认热门):"} handleClick={val => handleUpdateCategory(val)} oldVal={category} ></Horizen>
-            <Horizen list={alphaTypes} title={"首字母:"} handleClick={val => handleUpdateAlpha(val)} oldVal={alpha} ></Horizen>
+            <Horizen list={categoryTypes} title={"分类(默认热门):"} handleClick={val => handleUpdateCategory(val)} oldVal={singers.category} ></Horizen>
+            <Horizen list={alphaTypes} title={"首字母:"} handleClick={val => handleUpdateAlpha(val)} oldVal={singers.alpha} ></Horizen>
 
             <ListContainer>
                 <Suspense fallback={<Loading />}>
                     <Scroll
-                    // onScroll={forceCheck}
-                    // pullUp={handlePullUp}
-                    // pullDown={handlePullDown}
-                    // ref={scrollRef}
+                        onScroll={forceCheck}
+                        pullUp={handlePullUp}
+                        pullDown={handlePullDown}
+                        ref={scrollRef}
                     // pullUpLoading={pullUpLoading}
                     // pullDownLoading={pullDownLoading}
                     >

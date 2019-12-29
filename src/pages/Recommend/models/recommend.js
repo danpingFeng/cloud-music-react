@@ -27,15 +27,11 @@ export default {
     reducers: {
         saveBannerList(state, action) {
             state.bannerList = action.payload;
-            return {
-                ...state
-            };
+            return {...state};
         },
         saveRecommendList(state, action) {
             state.recommendList = action.payload;
-            return {
-                ...state
-            };
+            return {...state};
         },
     },
 }
