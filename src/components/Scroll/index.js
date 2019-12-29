@@ -1,17 +1,48 @@
-import React, {forwardRef, useState, useEffect, useRef, useImperativeHandle} from "react"
+import React, {forwardRef, useState, useEffect, useRef, useImperativeHandle, useMemo} from "react"
 import PropTypes from "prop-types"
 import BScroll from "better-scroll"
 import styled from 'styled-components';
-import {ScrollContainer} from './style';
+import {debounce} from '../../utils/utils';
+// import {ScrollContainer} from './style';
+
+const ScrollContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`
+
+const PullUpLoading = styled.div`
+  position: absolute;
+  left:0; right:0;
+  bottom: 5px;
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  z-index: 100;
+`
+
+export const PullDownLoading = styled.div`
+  position: absolute;
+  left:0; right:0;
+  top: 0px;
+  height: 30px;
+  margin: auto;
+  z-index: 100;
+`
 
 const Scroll = forwardRef((props, ref) => {
     const [bScroll, setBScroll] = useState();
-
     const scrollContaninerRef = useRef();
-
-    const {direction, click, refresh, bounceTop, bounceBottom} = props;
-
+    const {direction, click, refresh, pullUpLoading, pullDownLoading, bounceTop, bounceBottom} = props;
     const {pullUp, pullDown, onScroll} = props;
+
+    let pullUpDebounce = useMemo(() => {
+        return debounce(pullUp, 300)
+    })
+
+    let pullDownDebounce = useMemo(() => {
+        return debounce(pullDown, 300)
+    })
 
     useEffect(() => {
         const scroll = new BScroll(scrollContaninerRef.current, {

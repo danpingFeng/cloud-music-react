@@ -6,9 +6,9 @@ export default {
     state: {
         category: '',
         alpha: '',
-        enterLoading: '',
-        pullUpLoading: '',
-        pullDownLoading: '',
+        enterLoading: false,
+        pullUpLoading: false,
+        pullDownLoading: false,
         listOffset: 0,
         hotSingersList: [],
         singersList: [],
@@ -17,7 +17,6 @@ export default {
         *fetchHotSingersList({payload}, {call, put}) {
             const response = yield call(getHotSingersList, payload);
             yield put({
-                // type: 'saveHotSingersList',
                 type: 'saveSingersList',
                 payload: Array.isArray(response.artists) ? response.artists : []
             });
@@ -34,13 +33,20 @@ export default {
 
         *fetchMoreHotSingersList({payload}, {call, put}) {
             const response = yield call(getHotSingersList, payload);
-
             yield put({
-                type: 'saveMoreHotSingersList',
+                type: 'saveMoreSingersList',
                 payload: Array.isArray(response.artists) ? response.artists : []
             });
+        },
 
-        }
+        *fetchMoreSingersList({payload}, {call, put}) {
+            const {category, alpha, listOffset} = payload;
+            const response = yield call(getSingersList, category, alpha, listOffset);
+            yield put({
+                type: 'saveMoreSingersList',
+                payload: Array.isArray(response.artists) ? response.artists : []
+            })
+        },
 
     },
     reducers: {
@@ -50,6 +56,7 @@ export default {
         },
         saveSingersList(state, action) {
             state.singersList = action.payload;
+            state.listOffset = action.payload.length;
             return {...state}
         },
         setCategory(state, action) {
@@ -76,9 +83,10 @@ export default {
             state.pullDownLoading = action.payload;
             return {...state}
         },
-        saveMoreHotSingersList(state, action) {
-            console.log('saveMoreHotSingersList hotSingersList', state.hotSingersList);
-            console.log('saveMoreHotSingersList action.payload', action.payload);
+        saveMoreSingersList(state, action) {
+            state.singersList = [...state.singersList, ...action.payload];
+            state.listOffset = state.singersList.length;
+            return {...state};
         }
     }
 }

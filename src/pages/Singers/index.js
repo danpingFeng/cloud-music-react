@@ -41,9 +41,7 @@ function Singers({dispatch, singers}) {
         if (category === '') {
             dispatch({
                 type: 'singers/fetchMoreHotSingersList',
-                payload: {
-                    offset: singers.offset
-                }
+                payload: listOffset
             })
         } else {
             dispatch({
@@ -94,12 +92,13 @@ function Singers({dispatch, singers}) {
             type: 'singers/setEnterLoading',
             payload: true
         })
-
+        console.log('singers', singers);
         const {category, alpha, listOffset} = singers;
+
         // 请求全部歌手列表
         dispatch({
             type: 'singers/fetchSingersList',
-            payload: {category, alpha, listOffset}
+            payload: {category, alpha, listOffset: 0}
         })
 
         scrollRef.current.refresh();
@@ -125,7 +124,7 @@ function Singers({dispatch, singers}) {
         // 请求全部歌手列表
         dispatch({
             type: 'singers/fetchSingersList',
-            payload: {category, alpha, listOffset}
+            payload: {category, alpha, listOffset: 0}
         })
 
         scrollRef.current.refresh();
@@ -164,8 +163,8 @@ function Singers({dispatch, singers}) {
                         pullUp={handlePullUp}
                         pullDown={handlePullDown}
                         ref={scrollRef}
-                    // pullUpLoading={pullUpLoading}
-                    // pullDownLoading={pullDownLoading}
+                    // pullUpLoading={singers.pullUpLoading}
+                    // pullDownLoading={singers.pullDownLoading}
                     >
                         {
                             renderSingerList()
