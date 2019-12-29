@@ -4,8 +4,14 @@ import {getHotSingersList, getSingersList} from '@/services/singers'
 export default {
     namespaced: 'singers',
     state: {
+        category: '',
+        alpha: '',
+        enterLoading: '',
+        pullUpLoading: '',
+        pullDownLoading: '',
+        listOffset: 0,
         hotSingersList: [],
-        singersList: []
+        singersList: [],
     },
     effects: {
         *fetchHotSingersList({payload}, {call, put}) {
@@ -24,20 +30,23 @@ export default {
                 payload: Array.isArray(response.artists) ? response.artists : []
             })
         }
+
     },
     reducers: {
         saveHotSingersList(state, action) {
+            state.hotSingersList = action.payload;
             return {
-                ...state,
-                hotSingersList: action.payload
+                ...state
             }
         },
         saveSingersList(state, action) {
+            state.singersList = action.payload;
             return {
-                ...state,
-                singersList: action.payload
+                ...state
             }
+        },
+        setCategory(state, action) {
+            //    return state.set('category')
         }
-
     }
 }

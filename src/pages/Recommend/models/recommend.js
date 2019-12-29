@@ -26,15 +26,15 @@ export default {
 
     reducers: {
         saveBannerList(state, action) {
+            state.bannerList = action.payload;
             return {
-                ...state,
-                bannerList: action.payload,
+                ...state
             };
         },
         saveRecommendList(state, action) {
+            state.recommendList = action.payload;
             return {
-                ...state,
-                recommendList: action.payload,
+                ...state
             };
         },
     },
