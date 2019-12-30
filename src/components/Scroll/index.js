@@ -77,7 +77,8 @@ const Scroll = forwardRef((props, ref) => {
         bScroll.on('scrollEnd', () => {
             // 判断是否滑动到了底部
             if (bScroll.y <= bScroll.maxScrollY + 100) {
-                pullUp();
+                // pullUp();
+                pullUpDebounce();
             }
         });
         return () => {
@@ -90,7 +91,8 @@ const Scroll = forwardRef((props, ref) => {
         bScroll.on('touchEnd', (pos) => {
             // 判断用户的下拉动作
             if (pos.y > 50) {
-                pullDown();
+                // pullDown();
+                pullDownDebounce();
             }
         });
         return () => {

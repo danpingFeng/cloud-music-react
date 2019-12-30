@@ -30,6 +30,7 @@ function Singers({dispatch, singers}) {
     const enterDeatil = id => {
         router.push(`/singers/${id}`);
     }
+
     // 滑到最底部刷新部分的处理
     const handlePullUp = () => {
         dispatch({
@@ -92,7 +93,6 @@ function Singers({dispatch, singers}) {
             type: 'singers/setEnterLoading',
             payload: true
         })
-        console.log('singers', singers);
         const {category, alpha, listOffset} = singers;
 
         // 请求全部歌手列表
