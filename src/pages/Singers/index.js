@@ -14,11 +14,14 @@ function Singers({dispatch, singers}) {
     const scrollRef = useRef(null);
 
     useEffect(() => {
-        // 请求热门歌手列表
-        dispatch({
-            type: 'singers/fetchHotSingersList',
-            payload: 0
-        })
+        // 避免重复请求
+        if (!singers.singersList.length) {
+            // 请求热门歌手列表
+            dispatch({
+                type: 'singers/fetchHotSingersList',
+                payload: 0
+            })
+        }
 
         // 请求全部歌手列表
         // dispatch({

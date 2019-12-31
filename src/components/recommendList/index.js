@@ -3,6 +3,7 @@ import {getCount} from '@/utils/utils'
 import LazyLoad from 'react-lazyload';
 import IconFont from '@/assets/IconFont';
 import {ListWrapper, List, ListItem} from './style'
+import router from 'umi/router';
 
 // import {Icon} from 'antd';
 // const IconFont = Icon.createFromIconfontCN({
@@ -11,6 +12,10 @@ import {ListWrapper, List, ListItem} from './style'
 
 function recommendList(props) {
     const {recommendList} = props;
+    const enterDetail = id => {
+        console.log('enterDetail', id);
+        router.push(`/recommend/${id}`);
+    }
 
     return (
         <ListWrapper>
@@ -19,7 +24,7 @@ function recommendList(props) {
                 {
                     recommendList.map((item, index) => {
                         return (
-                            <ListItem key={item.id + index}>
+                            <ListItem key={item.id + index} onClick={() => {enterDetail(item.id)}}>
                                 <div className="img-wrapper">
                                     {/* decorate: 用来给给图片上的图标和文字提供一个遮罩，因为在字体颜色是白色，在面对白色图片背景的时候，文字会看不清或者看不到，因此提供一个阴影来衬托出文字 */}
                                     <div className="decorate"></div>
