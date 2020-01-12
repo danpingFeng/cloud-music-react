@@ -9,7 +9,7 @@ import style from '../../assets/global-style';
 
 import {Icon} from 'antd';
 const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1576120_c46wywawcku.js'
+    scriptUrl: '//at.alicdn.com/t/font_1576120_om96hq5d3m.js'
 });
 
 function Album(props) {
@@ -163,26 +163,26 @@ function Album(props) {
                         </TopDesc>
                         <Menu>
                             <div>
-                                <IconFont type="iconip-back" />
+                                <IconFont type="iconpinglun" />
                                 评论
                             </div>
                             <div>
-                                <IconFont type="iconip-back" />
+                                <IconFont type="iconxin" />
                                 点赞
                             </div>
                             <div>
-                                <IconFont type="iconip-back" />
+                                <IconFont type="iconfavor-active" />
                                 收藏
                             </div>
                             <div>
-                                <IconFont type="iconip-back" />
+                                <IconFont type="iconmsnui-more" />
                                 更多
                             </div>
                         </Menu>
                         <SongList>
                             <div className="first_line">
                                 <div className="play_all">
-                                    <IconFont type="iconip-back" />
+                                    <IconFont type="iconbofang" />
                                     <span > 播放全部 <span className="sum">(共 {currentAlbum.tracks.length} 首)</span></span>
                                 </div>
                                 <div className="add_list">

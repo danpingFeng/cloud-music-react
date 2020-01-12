@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 // import IconFont from '@/assets/IconFont';
 import {Icon} from 'antd';
 const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1576120_c46wywawcku.js'
+    scriptUrl: '//at.alicdn.com/t/font_1576120_om96hq5d3m.js'
 });
 
 const HeaderContainer = styled.div`
