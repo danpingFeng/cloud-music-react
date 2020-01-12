@@ -13,7 +13,6 @@ import router from 'umi/router';
 function recommendList(props) {
     const {recommendList} = props;
     const enterDetail = id => {
-        console.log('enterDetail', id);
         router.push(`/recommend/${id}`);
     }
 
