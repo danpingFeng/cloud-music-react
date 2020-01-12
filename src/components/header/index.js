@@ -30,23 +30,28 @@ const HeaderContainer = styled.div`
     }
 `
 const Header = React.forwardRef((props, ref) => {
-    const {handleClick, title} = props;
+    const {handleClick, title, isMarquee} = props;
     return (
         <HeaderContainer ref={ref}>
-            <IconFont className="back" type="iconip-back" />
-            <h1>{title}</h1>
+            <IconFont className="back" type="iconip-back" onClick={handleClick} />
+            {
+                isMarquee ? <marquee><h1>{title}</h1></marquee> : <h1>{title}</h1>
+            }
+
         </HeaderContainer>
     )
 })
 
 Header.defaultProps = {
     handleClick: () => {},
-    title: ''
+    title: '',
+    isMarquee: false
 }
 
 Header.propTypes = {
     handleClick: PropTypes.func,
-    title: PropTypes.string
+    title: PropTypes.string,
+    isMarquee: PropTypes.bool
 }
 
 export default React.memo(Header)
