@@ -1,6 +1,4 @@
 import request from '@/utils/request';
-
-
 export async function getHotSingersList(count) {
     return request(`/top/artists?offset=${count}`);
 }

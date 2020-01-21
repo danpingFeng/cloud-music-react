@@ -6,7 +6,6 @@ import {Content} from './style';
 import {forceCheck} from 'react-lazyload';
 import Loading from '@/components/loading';
 
-
 // import Scroll from '@/components/Scroll';
 // import RecommendList from '@/components/recommendList';
 const Scroll = React.lazy(() => import('@/components/Scroll'));

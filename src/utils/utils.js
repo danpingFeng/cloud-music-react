@@ -38,5 +38,9 @@ export function getName(list) {
         return item;
     });
     return str;
-
 }
+
+export function isEmptyObj(obj) {
+    return !obj || Object.keys(obj).length === 0;
+}
+
