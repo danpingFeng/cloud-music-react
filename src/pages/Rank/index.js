@@ -15,8 +15,7 @@ function Rank({dispatch, rank}) {
     }, [])
 
     const enterDetail = item => {
-        console.log('enterDetail');
-        // router.push(`/recommend/${item.id}`);
+        router.push(`/rank/${item.id}`);
     }
 
     const renderRankList = (list, global) => {
