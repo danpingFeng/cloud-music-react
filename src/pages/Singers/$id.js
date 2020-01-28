@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {CSSTransition} from 'react-transition-group';
 import {Container, ImgWrapper, BgLayer, SongListWrapper, CollectorButton} from './style';
+import {connect} from 'dva';
 import Header from '@/components/header';
 import Scroll from '@/components/Scroll';
 import SongList from '@/components/SongList';
@@ -8,8 +9,27 @@ import IconFont from '@/assets/IconFont';
 import {HEADER_HEIGHT} from '@/config/index';
 
 function Singer(props) {
+
+    const {dispatch, singerInfo} = props;
+    const {artist, hotSongs} = singerInfo.singerInfo;
+
+    if (artist) {
+        setTimeout(() => {
+            let h = imageWrapper.current.offsetHeight;
+            songScrollWrapper.current.style.top = `${h - OFFSET} px`;
+            initialHeight.current = h;
+            // 把遮罩先放在下面，以裹住歌曲列表
+            layer.current.style.top = `${h - OFFSET} px`;
+            songScroll.current.refresh();
+        }, 0);
+
+    }
+
     useEffect(() => {
-        console.log('id', props.match.params.id)
+        dispatch({
+            type: 'singerInfo/fetchSingerInfo',
+            payload: props.match.params.id
+        })
     }, []);
 
     const collectButton = useRef();
@@ -21,110 +41,7 @@ function Singer(props) {
     const initialHeight = useRef();
     const OFFSET = 5;
 
-    useEffect(() => {
-        let h = imageWrapper.current.offsetHeight;
-        songScrollWrapper.current.style.top = `${h - OFFSET} px`;
-        initialHeight.current = h;
-        // 把遮罩先放在下面，以裹住歌曲列表
-        layer.current.style.top = `${h - OFFSET} px`;
-        songScroll.current.refresh();
-    }, []);
-
-
     const [showStatus, setShowStatus] = useState(true);
-
-    const artist = {
-        picUrl: "https://p2.music.126.net/W__FCWFiyq0JdPtuLJoZVQ==/109951163765026271.jpg",
-        name: "薛之谦",
-        hotSongs: [
-            {
-                name: "我好像在哪见过你",
-                ar: [{name: "薛之谦"}],
-                al: {
-                    name: "薛之谦专辑"
-                }
-            },
-            {
-                name: "我好像在哪见过你",
-                ar: [{name: "薛之谦"}],
-                al: {
-                    name: "薛之谦专辑"
-                }
-            },
-            {
-                name: "我好像在哪见过你",
-                ar: [{name: "薛之谦"}],
-                al: {
-                    name: "薛之谦专辑"
-                }
-            },
-            {
-                name: "我好像在哪见过你",
-                ar: [{name: "薛之谦"}],
-                al: {
-                    name: "薛之谦专辑"
-                }
-            },
-            {
-                name: "我好像在哪见过你",
-                ar: [{name: "薛之谦"}],
-                al: {
-                    name: "薛之谦专辑"
-                }
-            },
-            {
-                name: "我好像在哪见过你",
-                ar: [{name: "薛之谦"}],
-                al: {
-                    name: "薛之谦专辑"
-                }
-            },
-            {
-                name: "我好像在哪见过你",
-                ar: [{name: "薛之谦"}],
-                al: {
-                    name: "薛之谦专辑"
-                }
-            },
-            {
-                name: "我好像在哪见过你",
-                ar: [{name: "薛之谦"}],
-                al: {
-                    name: "薛之谦专辑"
-                }
-            },
-            {
-                name: "我好像在哪见过你",
-                ar: [{name: "薛之谦"}],
-                al: {
-                    name: "薛之谦专辑"
-                }
-            },
-            {
-                name: "我好像在哪见过你",
-                ar: [{name: "薛之谦"}],
-                al: {
-                    name: "薛之谦专辑"
-                }
-            },
-            {
-                name: "我好像在哪见过你",
-                ar: [{name: "薛之谦"}],
-                al: {
-                    name: "薛之谦专辑"
-                }
-            },
-            {
-                name: "我好像在哪见过你",
-                ar: [{name: "薛之谦"}],
-                al: {
-                    name: "薛之谦专辑"
-                }
-            },
-
-            // 省略 20 条
-        ]
-    }
 
     const setStatusFalse = useCallback(() => {
         setShowStatus(false);
@@ -170,36 +87,39 @@ function Singer(props) {
     };
 
     return (
-        <CSSTransition
-            in={showStatus}
-            timeout={300}
-            classNames="fly"
-            appear={true}
-            unmountOnExit
-            onExited={props.history.goBack}>
+        artist ?
+            <CSSTransition
+                in={showStatus}
+                timeout={300}
+                classNames="fly"
+                appear={true}
+                unmountOnExit
+                onExited={props.history.goBack}>
 
-            <Container>
-                <Header handleClick={setStatusFalse} title={artist.name} ref={header}></Header>
-                <ImgWrapper ref={imageWrapper} bgUrl={artist.picUrl}>
-                </ImgWrapper>
-                <div className="filter"></div>
+                <Container>
+                    <Header handleClick={setStatusFalse} title={artist.name} ref={header}></Header>
+                    <ImgWrapper ref={imageWrapper} bgUrl={artist.picUrl}>
+                    </ImgWrapper>
+                    <div className="filter"></div>
 
-                <CollectorButton ref={collectButton}>
-                    <IconFont type="iconip-back" />
-                    <span className="text">收藏</span>
-                </CollectorButton>
+                    <CollectorButton ref={collectButton}>
+                        <IconFont type="iconip-back" />
+                        <span className="text">收藏</span>
+                    </CollectorButton>
 
-                <BgLayer ref={layer}></BgLayer>
+                    <BgLayer ref={layer}></BgLayer>
 
-                <SongListWrapper ref={songScrollWrapper}>
-                    <Scroll onScroll={handleScroll} ref={songScroll} ref={songScroll}>
-                        <SongList songs={artist.hotSongs} showCollect={false}>
-                        </SongList>
-                    </Scroll>
-                </SongListWrapper>
-            </Container>
-        </CSSTransition>
+                    <SongListWrapper ref={songScrollWrapper}>
+                        <Scroll onScroll={handleScroll} ref={songScroll} ref={songScroll}>
+                            <SongList songs={hotSongs} showCollect={false}>
+                            </SongList>
+                        </Scroll>
+                    </SongListWrapper>
+                </Container>
+            </CSSTransition>
+            : ''
     )
 }
-
-export default React.memo(Singer);
+export default connect(({singerInfo}) => ({
+    singerInfo
+}))(React.memo(Singer))
