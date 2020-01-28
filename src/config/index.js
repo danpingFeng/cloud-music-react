@@ -166,4 +166,40 @@ export const alphaTypes = [{
 }
 ];
 
+//歌单一页限定歌曲数量
+export const ONE_PAGE_COUNT = 50;
 
+
+// 顶部的高度
+export const HEADER_HEIGHT = 45;
+
+//播放模式
+export const playMode = {
+    sequence: 0,
+    loop: 1,
+    random: 2
+};
+
+// 倍速播放配置
+export const list = [
+    {
+        key: 0.75,
+        name: "x0.75"
+    },
+    {
+        key: 1,
+        name: "x1"
+    },
+    {
+        key: 1.25,
+        name: "x1.25"
+    },
+    {
+        key: 1.5,
+        name: "x1.5"
+    },
+    {
+        key: 2,
+        name: "x2"
+    }
+]
