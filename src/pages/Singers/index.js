@@ -133,13 +133,18 @@ function Singers({dispatch, singers}) {
         scrollRef.current.refresh();
     }
 
+    const enterDetail = id => {
+        router.push(`singers/${id}`)
+    }
+
     const renderSingerList = () => {
         return (
             <List>
                 {
                     singers.singersList.map((item, index) => {
                         return (
-                            <ListItem key={item.accountId + '' + index}>
+                            <ListItem key={item.accountId + '' + index}
+                                onClick={() => enterDetail(item.id)}>
                                 <div className="img_wrapper">
                                     <LazyLoad placeholder={<img src={require('./singer.png')} />} >
                                         <img src={`${item.picUrl}?parm=300*300`} width="100%" alt="" />
