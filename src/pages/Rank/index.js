@@ -63,7 +63,6 @@ function Rank({dispatch, rank}) {
 
                         <h1 classNam="global"> 全球榜 </h1>
                         {renderRankList(rank.globalList, true)}
-
                     </div>
                 </Scroll>
             </Suspense>

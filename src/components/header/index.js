@@ -15,7 +15,7 @@ const HeaderContainer = styled.div`
     height: 40px;
     line-height: 40px;
     width: 100%;
-    z-index: 100;
+    z-index: 110;
     display: flex;
     color: ${style["font-color-light"]};
 
