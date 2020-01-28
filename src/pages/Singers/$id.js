@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {CSSTransition} from 'react-transition-group';
 import {Container, ImgWrapper, BgLayer, SongListWrapper, CollectorButton} from './style';
 import Header from '../../components/header';
@@ -10,6 +10,25 @@ function Singer(props) {
     useEffect(() => {
         console.log('id', props.match.params.id)
     }, []);
+
+    const CollectButton = useRef();
+    const imgWrapper = useRef();
+    const header = useRef();
+    const songScrollWrapper = useRef();
+    const songScroll = useRef();
+    const layer = useRef();
+    const initialHeight = useRef();
+    const OFFSET = 5;
+
+    useEffect(() => {
+        let h = imgWrapper.current.offsetHeight;
+        songScrollWrapper.current.style.top = `${h - OFFSET} px`;
+        initialHeight.current = h;
+        // 把遮罩先放在下面，以裹住歌曲列表
+        layer.current.style.top = `${h - OFFSET} px`;
+        songScroll.current.refresh();
+    }, []);
+
 
     const [showStatus, setShowStatus] = useState(true);
 
@@ -35,6 +54,10 @@ function Singer(props) {
         ]
     }
 
+    const setStatusFalse = useCallback(() => {
+        setShowStatus(false);
+    }, []);
+
     return (
         <CSSTransition
             in={showStatus}
@@ -45,20 +68,19 @@ function Singer(props) {
             onExited={props.history.goBack}>
 
             <Container>
-                q123
-                <Header title={'头部'}></Header>
-                <ImgWrapper bgUrl={artist.picUrl}></ImgWrapper>
+                <Header handleClick={setStatusFalse} title={artist.name} ref={header}></Header>
+                <ImgWrapper ref={imgWrapper} bgUrl={artist.picUrl}></ImgWrapper>
                 <div className="filter"></div>
 
-                <CollectorButton>
+                <CollectorButton ref={CollectButton}>
                     <IconFont type="iconip-back" />
                     <span className="text">收藏</span>
                 </CollectorButton>
 
-                {/* <BgLayer></BgLayer> */}
+                <BgLayer ref={layer}></BgLayer>
 
-                <SongListWrapper>
-                    <Scroll>
+                <SongListWrapper ref={songScrollWrapper}>
+                    <Scroll ref={songScroll}>
                         <SongList songs={artist.hotSongs} showCollect={false}>
                         </SongList>
                     </Scroll>

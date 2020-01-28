@@ -20,20 +20,13 @@ const SongsList = React.forwardRef((props, refs) => {
                     <div className="info">
                         <span>{item.name}</span>
                         <span>
-                            {
-                                item.ar ? getName(item.ar) : getName(item.artists)
-                            }
-                            -
-                            {
-                                item.al ? getName(item.al) : getName(item.album.name)
-
-                            }
+                            {item.ar ? getName(item.ar) : getName(item.artists)} - {item.al ? item.al.name : item.album.name}
                         </span>
                     </div>
                 </li>
-            )
-            return res;
+            );
         }
+        return res;
     }
 
     const collect = count => {
