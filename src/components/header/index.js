@@ -2,11 +2,7 @@ import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import style from '../../assets/global-style';
 import PropTypes from "prop-types";
-// import IconFont from '@/assets/IconFont';
-import {Icon} from 'antd';
-const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1576120_om96hq5d3m.js'
-});
+import IconFont from '@/assets/IconFont';
 
 const HeaderContainer = styled.div`
     position: fixed;

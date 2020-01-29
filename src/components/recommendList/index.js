@@ -5,11 +5,6 @@ import IconFont from '@/assets/IconFont';
 import {ListWrapper, List, ListItem} from './style'
 import router from 'umi/router';
 
-// import {Icon} from 'antd';
-// const IconFont = Icon.createFromIconfontCN({
-//     : '//at.alicdn.com/t/font_1576120_rxiajctro5j.js'
-// });
-
 function recommendList(props) {
     const {recommendList} = props;
     const enterDetail = id => {
