@@ -2,10 +2,10 @@ import React, {useEffect, Suspense} from 'react';
 import {connect} from 'dva';
 import {Container, SongList, List, ListItem} from './style';
 import Scroll from '@/components/Scroll';
-
-// const Scroll = React.lazy(() => import('@/components/Scroll'));
 import Loading from '@/components/loading';
 import router from 'umi/router';
+
+import Player from '@/components/player';
 
 function Rank({dispatch, rank}) {
     useEffect(() => {
@@ -58,6 +58,8 @@ function Rank({dispatch, rank}) {
             <Suspense fallback={<Loading />}>
                 <Scroll>
                     <div>
+                        <Player></Player>
+
                         <h1 classNam="offical"> 官方榜 </h1>
                         {renderRankList(rank.officalList)}
 
