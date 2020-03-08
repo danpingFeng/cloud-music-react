@@ -22,7 +22,7 @@ export function debounce(func, delay) {
     }
 }
 
-export function filterIndex(list) {
+export function findIndex(list) {
     for (let i = 0; i < list.length - 1; i++) {
         if (list[i].tracks.length && !list[i + 1].tracks.length) {
             return i + 1;
@@ -59,9 +59,9 @@ export function shuffle(arr) {
     return new_arr;
 }
 
-export function findIndex(song, list) {
-    return list.findIndex(item => song.id === item.id)
-}
+// export function findIndex(song, list) {
+//     return list.findIndex(item => song.id === item.id)
+// }
 
 export function getSongUrl(id) {
     return `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
