@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useRef, useEffect, memo} from 'react';
 import {getName} from '@/utils/utils';
 import {MiniPlayerContainer} from './style';
 import IconFont from '@/assets/IconFont';

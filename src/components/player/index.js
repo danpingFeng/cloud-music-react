@@ -1,9 +1,9 @@
 import React, {useRef, useState, useffect} from 'react';
 
 import {connect} from 'dva';
-import MiniPlayer from './miniPlayer';
-import NormalPlayer from "./normalPlayer";
-import {isEmptyObj, shuffle, findIndex, getSongUrl} from '@/utils/utils';
+// import MiniPlayer from './miniPlayer';
+// import NormalPlayer from "./normalPlayer";
+// import {isEmptyObj, shuffle, findIndex, getSongUrl} from '@/utils/utils';
 
 function Player(props) {
     const {dispatch, player} = props;
@@ -16,8 +16,8 @@ function Player(props) {
 
     return (
         <div>
-            <MiniPlayer song={currentSong} fullScreen={fullScreen} />
-            <NormalPlayer song={currentSong} fullScreen={fullScreen} ></NormalPlayer>
+            {/* <MiniPlayer song={currentSong} fullScreen={fullScreen} />
+            <NormalPlayer song={currentSong} fullScreen={fullScreen} ></NormalPlayer> */}
         </div >
     )
 }
