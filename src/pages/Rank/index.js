@@ -4,8 +4,7 @@ import {Container, SongList, List, ListItem} from './style';
 import Scroll from '@/components/Scroll';
 import Loading from '@/components/loading';
 import router from 'umi/router';
-
-import Player from '@/components/player';
+import Player from '@/pages/player';
 
 function Rank({dispatch, rank}) {
     useEffect(() => {
@@ -59,7 +58,6 @@ function Rank({dispatch, rank}) {
                 <Scroll>
                     <div>
                         <Player></Player>
-
                         <h1 classNam="offical"> 官方榜 </h1>
                         {renderRankList(rank.officalList)}
 

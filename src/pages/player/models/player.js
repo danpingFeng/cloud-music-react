@@ -1,3 +1,5 @@
+import {playMode} from '@/config/index';
+
 export default {
     namespace: 'player',
     state: {

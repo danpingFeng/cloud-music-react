@@ -11,11 +11,13 @@ function MiniPlayer(props) {
     return (
         <CSSTransition
             classNames="mini"
-            in={fullScreen}
+            in={props.fullScreen}
             timeout={400}
             onEnter={() => {miniPlayerRef.current.style.display = "flex"}}
             onExited={() => {miniPlayerRef.current.style.display = "none";}}>
-            <MiniPlayerContainer ref={miniPlayerRef} onClick={() => setFullScreen(true)}>
+            <MiniPlayerContainer ref={miniPlayerRef}
+            // onClick={() => setFullScreen(true)}
+            >
                 <div className="icon">
                     <div className="imgWrapper">
                         <img src={song.al.picUrl} width="40" height="40" alt="" />
