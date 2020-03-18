@@ -18,6 +18,14 @@ const noWrap = () => {
     `
 }
 
+const bgFull = () => {
+  return `
+    background-position: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+  `
+};
+
 export default {
   'theme-color': '#d44439',
   'theme-color-shadow': 'rgba (212, 68, 57, .5)',
@@ -35,5 +43,6 @@ export default {
   'background-color-shadow': 'rgba (0, 0, 0, 0.3)',
   'highlight-background-color': '#fff',
   extendClick,
-  noWrap
+  noWrap,
+  bgFull
 }

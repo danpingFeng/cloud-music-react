@@ -1,10 +1,10 @@
-import React, {useRef, useState, useffect, useCallback} from 'react';
+import React, {useRef, useEffect, useState, useffect, useCallback} from 'react';
 import {CSSTransition} from 'react-transition-group';
 import {prefixStyle, formatPlayTime, getName} from '@/utils/utils';
 import IconFont from '@/assets/IconFont';
 import Scroll from '@/components/Scroll';
 import animations from "create-keyframe-animation";
-import {playMode, list} from "@/api/config";
+import {playMode, list} from "@/config";
 
 import {
     NormalPlayerContainer,

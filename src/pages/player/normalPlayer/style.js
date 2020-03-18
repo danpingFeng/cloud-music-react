@@ -1,5 +1,5 @@
 import styled, {keyframes} from "styled-components";
-import style from "../../../assets/global-style";
+import style from "@/assets/global-style";
 import disc from './disc.png';
 import needle from './needle.png';
 
