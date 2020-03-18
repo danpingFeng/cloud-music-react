@@ -9,15 +9,20 @@ function Player(props) {
     const {dispatch, player} = props;
     console.log('props', props);
     console.log('player', player);
-    const currentSong = {
-        al: {picUrl: "https://p1.music.126.net/JL_id1CFwNJpzgrXwemh4Q==/109951164172892390.jpg"},
-        name: "木偶人",
-        ar: [{name: "薛之谦"}]
-    }
+    // const currentSong = {
+    //     al: {picUrl: "https://p1.music.126.net/JL_id1CFwNJpzgrXwemh4Q==/109951164172892390.jpg"},
+    //     name: "木偶人",
+    //     ar: [{name: "薛之谦"}]
+    // }
+    const {currentSong, fullScreen, playing, sequencePlayList, playList, mode, speed, currentIndex, showPlayList} = props;
 
     return (
         <div>
-            <MiniPlayer song={currentSong} fullScreen={player.fullScreen} />
+            <MiniPlayer
+                song={currentSong}
+                full={fullScreen}
+                playing={playing}
+                mode={mode} />
             <NormalPlayer song={currentSong} fullScreen={player.fullScreen} ></NormalPlayer>
         </div >
     )

@@ -15,6 +15,7 @@ export default {
         // 当前歌曲在播放列表的索引位置
         currentIndex: -1,
         // 是否展示播放列表
+        speed: '',
         showPlayList: false,
         currentSong: {}
     },
