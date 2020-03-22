@@ -3,7 +3,8 @@ import PropTypes from "prop-types"
 import BScroll from "better-scroll"
 import styled from 'styled-components';
 import {debounce} from '../../utils/utils';
-// import {ScrollContainer} from './style';
+import Loading from '../loading-v1/index';
+import Loading2 from '../loading-v2/index';
 
 const ScrollContainer = styled.div`
   width: 100%;
@@ -13,7 +14,8 @@ const ScrollContainer = styled.div`
 
 const PullUpLoading = styled.div`
   position: absolute;
-  left:0; right:0;
+  left:0;
+  right:0;
   bottom: 5px;
   width: 60px;
   height: 60px;
@@ -23,7 +25,8 @@ const PullUpLoading = styled.div`
 
 export const PullDownLoading = styled.div`
   position: absolute;
-  left:0; right:0;
+  left:0;
+  right:0;
   top: 0px;
   height: 30px;
   margin: auto;
@@ -32,17 +35,18 @@ export const PullDownLoading = styled.div`
 
 const Scroll = forwardRef((props, ref) => {
     const [bScroll, setBScroll] = useState();
+    // current 指向初始化 bs 实例需要的 DOM 元素
     const scrollContaninerRef = useRef();
     const {direction, click, refresh, pullUpLoading, pullDownLoading, bounceTop, bounceBottom} = props;
     const {pullUp, pullDown, onScroll} = props;
 
     let pullUpDebounce = useMemo(() => {
         return debounce(pullUp, 300)
-    })
+    }, [pullUp])
 
     let pullDownDebounce = useMemo(() => {
         return debounce(pullDown, 300)
-    })
+    }, [pullDown])
 
     useEffect(() => {
         const scroll = new BScroll(scrollContaninerRef.current, {
@@ -51,8 +55,8 @@ const Scroll = forwardRef((props, ref) => {
             probeType: 3,
             click: click,
             bounce: {
-                top: bounceTop,
-                bottom: bounceBottom
+                top: bounceTop,  // 是否支持向上吸顶
+                bottom: bounceBottom  // 是否支持吸底
             }
         });
         setBScroll(scroll);
@@ -77,14 +81,14 @@ const Scroll = forwardRef((props, ref) => {
         bScroll.on('scrollEnd', () => {
             // 判断是否滑动到了底部
             if (bScroll.y <= bScroll.maxScrollY + 100) {
-                // pullUp();
+                // pullUp(); 防抖处理，此处应用节流
                 pullUpDebounce();
             }
         });
         return () => {
             bScroll.off('scrollEnd');
         }
-    }, [pullUp, bScroll]);
+    }, [pullUp, pullUpDebounce, bScroll]);
 
     useEffect(() => {
         if (!bScroll || !pullDown) return;
@@ -98,7 +102,7 @@ const Scroll = forwardRef((props, ref) => {
         return () => {
             bScroll.off('touchEnd');
         }
-    }, [pullDown, bScroll]);
+    }, [pullDown, pullDownDebounce, bScroll]);
 
 
     useEffect(() => {
@@ -107,6 +111,7 @@ const Scroll = forwardRef((props, ref) => {
         }
     });
 
+    // 利用 useImperativeHandle 暴露给外界方法，一般和 forwardRef 一起使用，ref 已经在 forWardRef 中默认传入
     useImperativeHandle(ref, () => ({
         refresh() {
             if (bScroll) {
@@ -121,10 +126,18 @@ const Scroll = forwardRef((props, ref) => {
         }
     }));
 
+    const PullUpdisplayStyle = pullUpLoading ? {display: ""} : {display: "none"};
+    const PullDowndisplayStyle = pullDownLoading ? {display: ""} : {display: "none"};
 
     return (
         <ScrollContainer ref={scrollContaninerRef}>
             {props.children}
+
+            {/* 滑到底部加载动画 */}
+            <PullUpLoading style={PullUpdisplayStyle}><Loading></Loading></PullUpLoading>
+            {/* 顶部下拉刷新动画 */}
+            <PullDownLoading style={PullDowndisplayStyle}><Loading2></Loading2></PullDownLoading>
+
         </ScrollContainer>
     );
 })
