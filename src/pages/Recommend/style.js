@@ -3,7 +3,7 @@ import style from '../../assets/global-style.js';
 
 export const Content = styled.div`
   position: fixed;
-  top: 80px;
+  top: 84px;
   bottom: 0;
   width: 100%;
 `

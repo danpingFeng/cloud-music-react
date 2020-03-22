@@ -25,17 +25,28 @@ export const Tab = styled.div`
     justify-content: space-around;
     align-items: center;
 
-    &>a {
+    a {
         letter-spacing: 1px;
         display: inline-block;
         // background: black;
         padding: 2px 0;
         color: #e4e4e4;
-    }
 
-    &>.selected {
-        padding: 3px 0;
-        border-bottom: 1px solid white;
-        font-weight: 500;
+
+    &.selected {
+        span {
+            padding: 3px 0;
+            font-weight: 700;
+            color: #f1f1f1;
+            border-bottom: 2px solid #f1f1f1;
+            }
+        }
     }
+`
+
+export const TabItem = styled.div`
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `

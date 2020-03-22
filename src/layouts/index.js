@@ -13,16 +13,27 @@ function BasicLayout(props) {
                 <span>
                     <IconFont type="iconmenu" />
                 </span>
-                <span>网易云音乐</span>
+                <span>我的云音乐</span>
                 <span>
                     <IconFont type="icon-search1"></IconFont>
                 </span>
             </Top>
             <Tab>
-                <NabLink to="/Recommend" activeClassName="selected">推荐
-            </NabLink>
-                <NabLink to="/Singers" activeClassName="selected">歌手</NabLink>
-                <NabLink to="/Rank" activeClassName="selected">排行</NabLink>
+                <NabLink to="/Recommend" activeClassName="selected">
+                    <TabItem>
+                        <span>推荐</span>
+                    </TabItem>
+
+                </NabLink>
+                <NabLink to="/Singers" activeClassName="selected">
+                    <TabItem>
+                        <span>歌手</span>
+                    </TabItem>
+                </NabLink>
+                <NabLink to="/Rank" activeClassName="selected"> <TabItem>
+                    <span>排行</span>
+                </TabItem>
+                </NabLink>
             </Tab>
             {props.children}
         </div>
