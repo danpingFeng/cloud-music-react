@@ -6,8 +6,7 @@ import {Content} from './style';
 import {forceCheck} from 'react-lazyload';
 import Loading from '@/components/loading';
 
-// import Scroll from '@/components/Scroll';
-// import RecommendList from '@/components/recommendList';
+// React.lazy + Suspense 组件懒加载
 const Scroll = React.lazy(() => import('@/components/Scroll'));
 const RecommendList = React.lazy(() => import('@/components/recommendList'));
 

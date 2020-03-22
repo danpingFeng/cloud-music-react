@@ -1,12 +1,15 @@
 import React from 'react';
 import IconFont from '@/assets/IconFont';
+import {LoadingWrapper} from './style'
 
 function Loading(params) {
     return (
-        <div>
+        <LoadingWrapper>
             <IconFont type="iconxingzhuang" />
-            拼命加载中...
-        </div>
+            <span>
+                拼命加载中...
+            </span>
+        </LoadingWrapper>
     )
 }
 export default React.memo(Loading);
