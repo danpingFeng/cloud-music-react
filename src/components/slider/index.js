@@ -11,9 +11,9 @@ function Slider(props) {
     useEffect(() => {
         if (bannerList.length && !sliderSwiper) {
             let sliderSwiper = new Swiper(".slider-container", {
-                loop: true,
-                autoplay: true,
-                autoplayDisableOnInteraction: false,
+                loop: true, // 循环播放
+                autoplay: true,  // 自动其切换
+                disableOnInteraction: false, //用户操作swiper之后，是否禁止autoplay。默认为true：停止。
                 pagination: {el: '.swiper-pagination'},
             });
 
@@ -39,6 +39,7 @@ function Slider(props) {
                         })
                     }
                 </div>
+                {/* 分页器。如果放置在swiper-container外面，需要自定义样式 */}
                 <div className="swiper-pagination"></div>
             </div>
         </SliderContainer >
