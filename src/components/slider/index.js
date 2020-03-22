@@ -3,18 +3,21 @@ import "swiper/css/swiper.css";
 import Swiper from 'swiper';
 import {SliderContainer} from './style';
 
+// 轮播组件
 function Slider(props) {
     const [sliderSwiper, setSliderSwiper] = useState(null);
     const {bannerList} = props;
 
     useEffect(() => {
         if (bannerList.length && !sliderSwiper) {
-            let sliderSwiper = new Swiper(".swiper-container", {
+            let sliderSwiper = new Swiper(".slider-container", {
                 loop: true,
                 autoplay: true,
                 autoplayDisableOnInteraction: false,
                 pagination: {el: '.swiper-pagination'},
             });
+
+            // 初始化slider
             setSliderSwiper(sliderSwiper);
         }
     }, [bannerList.length, sliderSwiper]);
@@ -22,25 +25,23 @@ function Slider(props) {
     return (
         <SliderContainer>
             <div className="before"></div>
-            <div className="slider-wrapper">
-                <div className='swiper-container'>
-                    <div className="swiper-wrapper">
-                        {
-                            bannerList.map(slider => {
-                                return (
-                                    <div className="swiper-slide" key={slider.imageUrl}>
-                                        <div className="slider-nav">
-                                            <img src={slider.imageUrl} width='100%' height='100%' alt="推荐" />
-                                        </div>
+            <div className="slider-container">
+                <div className='swiper-wrapper'>
+                    {
+                        bannerList.map(slider => {
+                            return (
+                                <div className="swiper-slide" key={slider.imageUrl}>
+                                    <div className="slider-nav">
+                                        <img src={slider.imageUrl} width='100%' height='100%' alt="推荐" />
                                     </div>
-                                );
-                            })
-                        }
-                    </div>
+                                </div>
+                            );
+                        })
+                    }
                 </div>
+                <div className="swiper-pagination"></div>
             </div>
-            <div className="swiper-pagination"></div>
-        </SliderContainer>
+        </SliderContainer >
     )
 }
 

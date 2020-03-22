@@ -12,14 +12,20 @@ const Scroll = React.lazy(() => import('@/components/Scroll'));
 const RecommendList = React.lazy(() => import('@/components/recommendList'));
 
 function Recommend({dispatch, recommend}) {
-    useEffect(() => {
-        dispatch({
-            type: 'recommend/fetchBannerList',
-        });
 
-        dispatch({
-            type: 'recommend/fetchRecommendList',
-        });
+    useEffect(() => {
+        if (!recommend.bannerList.length) {
+            dispatch({
+                type: 'recommend/fetchBannerList',
+            });
+        }
+
+        if (!recommend.recommendList.length) {
+            dispatch({
+                type: 'recommend/fetchRecommendList',
+            });
+        }
+
     }, [])
 
     return (
