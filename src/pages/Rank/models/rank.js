@@ -23,7 +23,6 @@ export default {
             let index = findIndex(action.payload);
             state.officalList = state.rankList.slice(0, index);
             state.globalList = state.rankList.slice(index);
-            // console.log('saveRankList', officalList, globalList);
             return {...state};
         }
     }

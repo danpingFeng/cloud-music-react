@@ -18,12 +18,12 @@ function Player(props) {
 
     return (
         <div>
-            <MiniPlayer
+            {/* <MiniPlayer
                 song={currentSong}
                 full={fullScreen}
                 playing={playing}
                 mode={mode} />
-            <NormalPlayer song={currentSong} fullScreen={player.fullScreen} ></NormalPlayer>
+            <NormalPlayer song={currentSong} fullScreen={player.fullScreen} ></NormalPlayer> */}
         </div >
     )
 }

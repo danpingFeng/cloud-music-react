@@ -21,9 +21,9 @@ function Rank({dispatch, rank}) {
         return (
             <List globalRank={global}>
                 {
-                    list.map(item => {
+                    list.map((item, index) => {
                         return (
-                            <ListItem key={item.coverImgUrl} tracks={item.tracks} onClick={() => {enterDetail(item)}}>
+                            <ListItem key={`${item.coverImgUrl}${index}`} tracks={item.tracks} onClick={() => {enterDetail(item)}}>
                                 <div className="img_wrapper">
                                     <img src={item.coverImgUrl} alt="" />
                                     <div className="decorate"></div>
@@ -48,22 +48,25 @@ function Rank({dispatch, rank}) {
                     })
                 }
             </SongList>
-        )
-            : null
+        ) : null
     }
 
     return (
         <Container>
             <Suspense fallback={<Loading />}>
                 <Scroll>
-                    <div>
-                        <Player></Player>
-                        <h1 classNam="offical"> 官方榜 </h1>
-                        {renderRankList(rank.officalList)}
+                    {
 
-                        <h1 classNam="global"> 全球榜 </h1>
-                        {renderRankList(rank.globalList, true)}
-                    </div>
+                        <div>
+                            <Player></Player>
+                            <h1 className="offical"> 官方榜 </h1>
+                            {renderRankList(rank.officalList)}
+
+                            <h1 className="global"> 全球榜 </h1>
+                            {renderRankList(rank.globalList, true)}
+                        </div>
+                    }
+
                 </Scroll>
             </Suspense>
         </Container>
