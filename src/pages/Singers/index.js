@@ -1,6 +1,5 @@
 import React, {useState, useEffect, Suspense, useRef} from 'react';
-import Horizen from '@/components/horizenItem';
-// import Scroll from '@/components/Scroll';
+import Horizen from '@/components/horizen-item';
 import {categoryTypes, alphaTypes} from '@/config/index';
 import {NavContainer, ListContainer, List, ListItem} from './style';
 import {connect} from 'dva';
@@ -8,7 +7,7 @@ import Loading from '@/components/loading';
 import LazyLoad, {forceCheck} from 'react-lazyload';
 import router from 'umi/router';
 
-const Scroll = React.lazy(() => import('@/components/Scroll'));
+const Scroll = React.lazy(() => import('@/components/scroll'));
 
 function Singers({dispatch, singers}) {
     const scrollRef = useRef(null);

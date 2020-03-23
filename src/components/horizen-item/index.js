@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect, memo} from 'react';
 import styled from 'styled-components';
-import Scroll from '../Scroll/index';
+import Scroll from '../scroll/index';
 import style from '../../assets/global-style';
 
 const List = styled.div`

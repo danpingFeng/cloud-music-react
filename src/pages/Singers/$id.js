@@ -3,7 +3,7 @@ import {CSSTransition} from 'react-transition-group';
 import {Container, ImgWrapper, BgLayer, SongListWrapper, CollectorButton} from './style';
 import {connect} from 'dva';
 import Header from '@/components/header';
-import Scroll from '@/components/Scroll';
+import Scroll from '@/components/scroll';
 import SongList from '@/components/SongList';
 import IconFont from '@/assets/IconFont';
 import {HEADER_HEIGHT} from '@/config/index';

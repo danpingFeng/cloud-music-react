@@ -7,8 +7,8 @@ import {forceCheck} from 'react-lazyload';
 import Loading from '@/components/loading';
 
 // React.lazy + Suspense 组件懒加载
-const Scroll = React.lazy(() => import('@/components/Scroll'));
-const RecommendList = React.lazy(() => import('@/components/recommendList'));
+const Scroll = React.lazy(() => import('@/components/scroll'));
+const RecommendList = React.lazy(() => import('@/components/recommend-list'));
 
 function Recommend({dispatch, recommend}) {
 
@@ -30,7 +30,7 @@ function Recommend({dispatch, recommend}) {
     return (
         <Content>
             <Suspense fallback={<Loading />}>
-                {/* vue使用slot分发内容与react使用prop分发内容 */}
+                {/* vue使用slot分发内容,react使用prop分发内容 */}
                 <Scroll className="list" onScroll={forceCheck}>
                     <div>
                         <Slider bannerList={recommend.bannerList}></Slider>

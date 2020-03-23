@@ -2,7 +2,7 @@ import React, {useRef, useEffect, useState, useffect, useCallback} from 'react';
 import {CSSTransition} from 'react-transition-group';
 import {prefixStyle, formatPlayTime, getName} from '@/utils/utils';
 import IconFont from '@/assets/IconFont';
-import Scroll from '@/components/Scroll';
+import Scroll from '@/components/scroll';
 import animations from "create-keyframe-animation";
 import {playMode, list} from "@/config";
 

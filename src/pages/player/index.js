@@ -1,8 +1,8 @@
 import React, {useRef, useState, useffect} from 'react';
 
 import {connect} from 'dva';
-import MiniPlayer from './miniPlayer';
-import NormalPlayer from "./normalPlayer";
+import MiniPlayer from './mini-player';
+import NormalPlayer from "./normal-player";
 // import {isEmptyObj, shuffle, findIndex, getSongUrl} from '@/utils/utils';
 
 function Player(props) {

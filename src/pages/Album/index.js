@@ -3,7 +3,7 @@ import {Container, TopDesc, Menu, SongList, SongItem} from './style';
 import {connect} from 'dva';
 import {CSSTransition} from 'react-transition-group';
 import Header from '@/components/header';
-import Scroll from '@/components/Scroll';
+import Scroll from '@/components/scroll';
 // import IconFont from '@/assets/IconFont';
 import {getCount, getName, isEmptyObj} from '@/utils/utils';
 import style from '../../assets/global-style';

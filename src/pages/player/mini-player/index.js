@@ -5,6 +5,7 @@ import IconFont from '@/assets/IconFont';
 import {CSSTransition} from 'react-transition-group';
 
 function MiniPlayer(props) {
+    console.log('mini player', props);
     const {song} = props;
     const miniPlayerRef = useRef();
 
