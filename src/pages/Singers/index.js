@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Suspense, useRef} from 'react';
+import React, {useEffect, Suspense, useRef} from 'react';
 import Horizen from '@/components/horizen-item';
 import {categoryTypes, alphaTypes} from '@/config/index';
 import {NavContainer, ListContainer, List, ListItem} from './style';
@@ -28,10 +28,6 @@ function Singers({dispatch, singers}) {
         //     payload: {category: singers.category, alpha: singers.alpha, listOffset: 0}
         // })
     }, []);
-
-    const enterDeatil = id => {
-        router.push(`/singers/${id}`);
-    }
 
     // 滑到最底部刷新部分的处理
     const handlePullUp = () => {
@@ -159,6 +155,7 @@ function Singers({dispatch, singers}) {
     }
 
     return (
+        // NavContainer 用于包裹 better-scroll,且尺寸必须确定
         <NavContainer>
             <Horizen list={categoryTypes} title={"分类(默认热门):"} handleClick={val => handleUpdateCategory(val)} oldVal={singers.category} ></Horizen>
             <Horizen list={alphaTypes} title={"首字母:"} handleClick={val => handleUpdateAlpha(val)} oldVal={singers.alpha} ></Horizen>

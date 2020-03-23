@@ -14,6 +14,7 @@ const RecommendList = React.lazy(() => import('@/components/recommend-list'));
 function Recommend({dispatch, recommend}) {
 
     useEffect(() => {
+        // 防止多次发请求
         if (!recommend.bannerList.length) {
             dispatch({
                 type: 'recommend/fetchBannerList',

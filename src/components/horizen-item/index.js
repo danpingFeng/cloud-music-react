@@ -1,20 +1,21 @@
 import React, {useState, useRef, useEffect, memo} from 'react';
 import styled from 'styled-components';
 import Scroll from '../scroll/index';
+import {PropTypes} from 'prop-types';
 import style from '../../assets/global-style';
 
 const List = styled.div`
     display: flex;
     align-items: center;
     height: 30px;
+    justify-content: center;
     overflow: hidden;
-
-    .title {
+    >span:first-of-type {
         display: block;
         flex: 0 0 auto;
         padding: 5px 0;
-        margin-right: 5px;
         color: grey;
+        font-size: ${style["font-size-m"]};
         vertical-align: middle;
     }
 `
@@ -30,12 +31,14 @@ const ListItem = styled.span`
         opacity: 0.8;
     }
 `
-
-
+// 对scroll进行重新包装，支持横线滚动
 function Horizen(props) {
+    const [refreshCategoryScroll, setRefreshCategoryScroll] = useState(false);
+    const Category = useRef(null);
+
     const {list, oldVal, title} = props;
     const {handleClick} = props;
-    const Category = useRef(null);
+
     useEffect(() => {
         let categoryDom = Category.current;
         let tagElems = categoryDom.querySelectorAll("span");
@@ -43,14 +46,16 @@ function Horizen(props) {
         Array.from(tagElems).forEach(ele => {
             totalWidth += ele.offsetWidth;
         });
+        totalWidth += 2;
         categoryDom.style.width = `${totalWidth}px`;
-    }, [])
+        setRefreshCategoryScroll(true);
+    }, [refreshCategoryScroll]);
 
     return (
-        <Scroll direction="horizental">
+        <Scroll direction="horizental" refresh={true}>
             <div ref={Category}>
                 <List>
-                    <span className="title">{title}</span>
+                    <span>{title}</span>
                     {
                         list.map(item => {
                             return (
@@ -78,7 +83,7 @@ Horizen.defaultProps = {
 };
 
 Horizen.propTypes = {
-    // list: PropTypes.array,
-    // handleClick: PropTypes.func
+    list: PropTypes.array,
+    handleClick: PropTypes.func
 }
-export default React.memo(Horizen);
+export default memo(Horizen);
