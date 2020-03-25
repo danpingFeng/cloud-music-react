@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 import style from '../../assets/global-style.js';
 
+//enter是入场前的刹那（点击按钮），appear指页面第一次加载前的一刹那（自动）
+//enter-active指入场后到入场结束的过程，appear-active则是页面第一次加载自动执行
+//入场动画执行完毕后，保持状态
+//出场 同样的道理
+
+// 旋转动画:
+// 设定 transfrom 的固定点，接下来的动画都是绕这个点旋转或平移
+// 设置 rotateZ 的值，让整个页面能够拥有 Z 坐标方向的矢量
+
 export const Container = styled.div`
     position: fixed;
     top: 0;
@@ -69,7 +78,7 @@ export const TopDesc = styled.div`
       width: 100%;
       height: 35px;
       border-radius: 3px;
-      background: linear-gradient (hsla (0,0%,43%,.4),hsla (0,0%,100%,0));
+      background: linear-gradient(hsla(0,0%,43%,.4),hsla(0,0%,100%,0));
     }
     .play_count {
       position: absolute;
@@ -139,7 +148,7 @@ export const Menu = styled.div`
     color: ${style["font-color-light"]};
     z-index:1000;
     font-weight: 500;
-    .iconfont {
+    .anticon {
       font-size: 20px;
     }
   }

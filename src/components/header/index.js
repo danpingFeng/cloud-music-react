@@ -16,9 +16,10 @@ const HeaderContainer = styled.div`
     color: ${style["font-color-light"]};
 
     .back {
+        width: 20px;
+        margin-top: 4px;
         margin-right: 5px;
         font-size: 20px;
-        width: 20px;
     }
     >h1 {
         font-size: ${style["font-size-l"]};
