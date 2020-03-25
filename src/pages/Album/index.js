@@ -48,7 +48,7 @@ function Album(props) {
         let minScrollY = -HEADER_HEIGHT;
         let percent = Math.abs(pos.y / minScrollY);
         let headerDom = headerEl.current;
-        // 滑过顶部的高度开始变化
+        // 滑过顶部的高度开始变化,当向上移动超过header头部的时候，滚动
         if (pos.y < minScrollY) {
             headerDom.style.backgroundColor = style["theme-color"];
             headerDom.style.opacity = Math.min(1, (percent - 1) / 2);
