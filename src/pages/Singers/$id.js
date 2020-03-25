@@ -4,7 +4,7 @@ import {Container, ImgWrapper, BgLayer, SongListWrapper, CollectorButton} from '
 import {connect} from 'dva';
 import Header from '@/components/header';
 import Scroll from '@/components/scroll';
-import SongList from '@/components/SongList';
+import SongList from '@/components/songList';
 import IconFont from '@/assets/IconFont';
 import {HEADER_HEIGHT} from '@/config/index';
 

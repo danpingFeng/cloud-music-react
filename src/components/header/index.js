@@ -31,6 +31,7 @@ const Header = React.forwardRef((props, ref) => {
         <HeaderContainer ref={ref}>
             <IconFont className="back" type="iconip-back" onClick={handleClick} />
             {
+                // marquee 跑马灯滚动效果html 属性
                 isMarquee ? <marquee><h1>{title}</h1></marquee> : <h1>{title}</h1>
             }
 
