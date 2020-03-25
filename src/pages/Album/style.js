@@ -154,7 +154,6 @@ export const Menu = styled.div`
   }
 `;
 
-
 //style.js 中加入
 export const SongList = styled.div`
   border-radius: 10px;
@@ -187,19 +186,18 @@ export const SongList = styled.div`
     .add_list,.isCollected {
       display: flex;
       align-items: center;
+      justify-content: center;
       position: absolute;
       right: 0; top :0; bottom: 0;
       width: 130px;
       line-height: 34px;
       background: ${style["theme-color"]};
       color: ${style["font-color-light"]};
-      font-size: 0;
+
       border-radius: 3px;
       vertical-align: top;
-      .iconfont {
-        vertical-align: top;
-        font-size: 10px;
-        margin: 0 5px 0 10px;
+      .anticon {
+        height: 30px;
       }
       span {
         font-size: 14px;

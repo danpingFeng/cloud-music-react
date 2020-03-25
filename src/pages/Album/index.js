@@ -11,7 +11,7 @@ import router from 'umi/router';
 import {Icon} from 'antd';
 import Loading from '@/components/loading';
 const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1576120_om96hq5d3m.js'
+    scriptUrl: '//at.alicdn.com/t/font_1576120_bblu5hxv90h.js'
 });
 
 // 歌单数据层
@@ -111,14 +111,15 @@ function Album(props) {
     };
     const renderSongList = () => {
         return (
-            <SongList>
+            <SongList showBackground={true}>
                 <div className="first_line">
                     <div className="play_all">
                         <IconFont type="iconbofang" />
                         <span > 播放全部 <span className="sum">(共 {currentAlbum.tracks.length} 首)</span></span>
                     </div>
+
                     <div className="add_list">
-                        <IconFont type="iconip-back" />
+                        <IconFont type="iconxin" />
                         <span > 收藏 ({getCount(currentAlbum.subscribedCount)})</span>
                     </div>
                 </div>
