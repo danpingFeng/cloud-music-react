@@ -199,6 +199,7 @@ export const SongList = styled.div`
       .anticon {
         height: 30px;
       }
+
       span {
         font-size: 14px;
         line-height: 34px;
