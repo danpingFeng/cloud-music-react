@@ -110,7 +110,7 @@ function Singer(props) {
                     <BgLayer ref={layer}></BgLayer>
 
                     <SongListWrapper ref={songScrollWrapper}>
-                        <Scroll onScroll={handleScroll} ref={songScroll} ref={songScroll}>
+                        <Scroll onScroll={handleScroll} ref={songScroll}>
                             <SongList songs={hotSongs} showCollect={false}>
                             </SongList>
                         </Scroll>
