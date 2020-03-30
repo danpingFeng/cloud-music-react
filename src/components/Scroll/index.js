@@ -83,8 +83,9 @@ const Scroll = forwardRef((props, ref) => {
 
     useEffect(() => {
         if (!bScroll || !pullUp) return;
+        // 滚动结束时触发
         bScroll.on('scrollEnd', () => {
-            // 判断是否滑动到了底部
+            // 判断是否滑动到了底部, 触发上拉加载
             if (bScroll.y <= bScroll.maxScrollY + 100) {
                 // pullUp(); 防抖处理，此处应用节流
                 pullUpDebounce();
@@ -111,6 +112,8 @@ const Scroll = forwardRef((props, ref) => {
 
 
     useEffect(() => {
+        // 每次re-render都要更新scroll,保证正确的渲染状态，
+        // 当 DOM 结构发生变化的时候务必要调用refresh()确保滚动的效果正常，重新渲染高度
         if (refresh && bScroll) {
             bScroll.refresh();
         }
@@ -118,6 +121,7 @@ const Scroll = forwardRef((props, ref) => {
 
     // 利用 useImperativeHandle 暴露给外界方法，一般和 forwardRef 一起使用，ref 已经在 forWardRef 中默认传入
     useImperativeHandle(ref, () => ({
+        // refresh 方法暴露给外界，给外界提供刷新Scroll的接口
         refresh() {
             if (bScroll) {
                 bScroll.refresh();

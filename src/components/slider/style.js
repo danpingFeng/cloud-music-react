@@ -11,11 +11,11 @@ export const SliderContainer = styled.div`
 
   .before {
     position: absolute;
-    top: 0;
+    top: -300px;
     width: 100%;
-    height: 110px;
-    z-index: 1;
+    height: 410px;
     background: ${style["theme-color"]};
+    z-index: 1;
   }
   .slider-container {
     position: relative;

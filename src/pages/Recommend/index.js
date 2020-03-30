@@ -31,10 +31,11 @@ function Recommend({dispatch, recommend}) {
 
     return (
         <Content>
-            {/* <Loading></Loading> */}
             <Suspense fallback={<Loading />}>
                 {/* vue使用slot分发内容,react使用prop分发内容 */}
+                {/* 滚动的时候懒加载图片 */}
                 <Scroll className="list" onScroll={forceCheck}>
+                    {/* better-scroll只处理容器的第一个子元素，其他的元素会被忽略，如果里面需要滚动的部分有好几部分，一定要拿一个元素把他包裹起来 */}
                     <div>
                         <Slider bannerList={recommend.bannerList}></Slider>
                         <RecommendList recommendList={recommend.recommendList}></RecommendList>
