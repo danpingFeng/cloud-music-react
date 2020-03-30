@@ -33,13 +33,17 @@ export const PullDownLoading = styled.div`
   z-index: 100;
 `
 
+// forwardRef 接收父组件传递过来的ref
 const Scroll = forwardRef((props, ref) => {
     const [bScroll, setBScroll] = useState();
     // current 指向初始化 bs 实例需要的 DOM 元素
     const scrollContaninerRef = useRef();
     const {direction, click, refresh, pullUpLoading, pullDownLoading, bounceTop, bounceBottom} = props;
+
+    // 上拉加载、下拉刷新 和 滚动请求 的函数
     const {pullUp, pullDown, onScroll} = props;
 
+    // 对函数做节流处理
     let pullUpDebounce = useMemo(() => {
         return debounce(pullUp, 300)
     }, [pullUp])
@@ -68,6 +72,7 @@ const Scroll = forwardRef((props, ref) => {
 
     useEffect(() => {
         if (!bScroll || !onScroll) return;
+        // 绑定事件，监听滚动的位置，scroll 为position，回传给父组件
         bScroll.on('scroll', (scroll) => {
             onScroll(scroll);
         })

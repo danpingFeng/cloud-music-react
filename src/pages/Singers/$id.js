@@ -20,6 +20,7 @@ function Singer(props) {
             initialHeight.current = h;
             // 把遮罩先放在下面，以裹住歌曲列表
             layer.current.style.top = `${h - OFFSET} px`;
+            // 如果子元素或者父元素 DOM 结构发生改变的时候，必须重新调用 scroll.refresh() 方法重新计算来确保滚动效果的正常。
             songScroll.current.refresh();
         }, 0);
 
