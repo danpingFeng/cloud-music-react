@@ -10,9 +10,22 @@ import {HEADER_HEIGHT} from '@/config/index';
 
 // 歌手页面
 function Singer(props) {
-
     const {dispatch, singerInfo} = props;
     const {artist, hotSongs} = singerInfo.singerInfo;
+
+    const collectButton = useRef();
+    const imageWrapper = useRef();
+    const header = useRef();
+    const songScrollWrapper = useRef();
+    const songScroll = useRef();
+    const layer = useRef();
+
+
+    const initialHeight = useRef(0);
+    // 往上偏移的尺寸，露出圆角
+    const OFFSET = 5;
+
+    const [showStatus, setShowStatus] = useState(true);
 
     if (artist) {
         setTimeout(() => {
@@ -32,19 +45,9 @@ function Singer(props) {
         dispatch({
             type: 'singerInfo/fetchSingerInfo',
             payload: props.match.params.id
-        })
+        });
     }, []);
 
-    const collectButton = useRef();
-    const imageWrapper = useRef();
-    const header = useRef();
-    const songScrollWrapper = useRef();
-    const songScroll = useRef();
-    const layer = useRef();
-    const initialHeight = useRef();
-    const OFFSET = 5;
-
-    const [showStatus, setShowStatus] = useState(true);
 
     const setStatusFalse = useCallback(() => {
         setShowStatus(false);
@@ -60,8 +63,7 @@ function Singer(props) {
         const minScrollY = -(height - OFFSET) + HEADER_HEIGHT;
 
         const percent = Math.abs(newY / height);
-        //说明: 在歌手页的布局中，歌单列表其实是没有自己的背景的，layerDOM其实是起一个遮罩的作用，给歌单内容提供白色背景
-        //因此在处理的过程中，随着内容的滚动，遮罩也跟着移动
+        //说明: 在歌手页的布局中，歌单列表其实是没有自己的背景的，layerDOM其实是起一个遮罩的作用，给歌单内容提供白色背景, 因此在处理的过程中，随着内容的滚动，遮罩也跟着移动
         if (newY > 0) {
             //处理往下拉的情况,效果：图片放大，按钮跟着偏移
             imageDOM.style["transform"] = `scale(${1 + percent})`;
