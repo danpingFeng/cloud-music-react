@@ -40,7 +40,6 @@ const Scroll = forwardRef((props, ref) => {
     const scrollContaninerRef = useRef();
     const {direction, click, refresh, pullUpLoading, pullDownLoading, bounceTop, bounceBottom} = props;
 
-    console.log('scroll', pullUpLoading);
     // 上拉加载、下拉刷新 和 滚动请求 的函数
     const {pullUp, pullDown, onScroll} = props;
 

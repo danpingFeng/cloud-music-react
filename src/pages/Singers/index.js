@@ -108,18 +108,20 @@ function Singers({dispatch, singers}) {
             payload: 0
         });
 
-        dispatch({
-            type: 'singers/setEnterLoading',
-            payload: true
-        })
+        // dispatch({
+        //     type: 'singers/setEnterLoading',
+        //     payload: true
+        // })
 
         const {category, alpha, listOffset} = singers;
+
         // 请求全部歌手列表
         dispatch({
             type: 'singers/fetchSingersList',
             payload: {category, alpha, listOffset: 0}
         })
 
+        // 请求列表之后强制刷新
         scrollRef.current.refresh();
     }
 
@@ -150,10 +152,13 @@ function Singers({dispatch, singers}) {
     }
 
     return (
-        //  NavContainer，scroll外部容器的宽度要设定, 设置为100%
-        <NavContainer>
-            <Horizen list={categoryTypes} title={"分类(默认热门):"} handleClick={val => handleUpdateCategory(val)} oldVal={singers.category} ></Horizen>
-            <Horizen list={alphaTypes} title={"首字母:"} handleClick={val => handleUpdateAlpha(val)} oldVal={singers.alpha} ></Horizen>
+
+        <div>
+            {/* NavContainer，scroll外部容器的宽度要设定, 设置为100% */}
+            <NavContainer>
+                <Horizen list={categoryTypes} title={"分类(默认热门):"} handleClick={val => handleUpdateCategory(val)} oldVal={singers.category} ></Horizen>
+                <Horizen list={alphaTypes} title={"首字母:"} handleClick={val => handleUpdateAlpha(val)} oldVal={singers.alpha} ></Horizen>
+            </NavContainer >
 
             {/* ListContainer fixed定位 top+bottom 限定Srcoll外部容器的高度 */}
             <ListContainer>
@@ -172,7 +177,10 @@ function Singers({dispatch, singers}) {
                     </Scroll>
                 </Suspense>
             </ListContainer>
-        </NavContainer >
+
+            {/* 入场加载动画 */}
+            {/* {singers.enterLoading ? <EnterLoading><Loading></Loading></EnterLoading> : null} */}
+        </div>
     );
 }
 
