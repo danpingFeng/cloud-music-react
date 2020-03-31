@@ -4,6 +4,7 @@ import Scroll from '../scroll/index';
 import {PropTypes} from 'prop-types';
 import style from '../../assets/global-style';
 
+// 包裹容器的宽度设置为100%
 const List = styled.div`
     display: flex;
     align-items: center;
@@ -40,19 +41,20 @@ function Horizen(props) {
     const {handleClick} = props;
 
     useEffect(() => {
+        // 横线滚动，外面容器要宽度固定，其次内容宽度要大于容器宽度。这里初始化内容宽度
         let categoryDom = Category.current;
         let tagElems = categoryDom.querySelectorAll("span");
         let totalWidth = 0;
         Array.from(tagElems).forEach(ele => {
             totalWidth += ele.offsetWidth;
         });
-        totalWidth += 2;
         categoryDom.style.width = `${totalWidth}px`;
         setRefreshCategoryScroll(true);
     }, [refreshCategoryScroll]);
 
     return (
         <Scroll direction="horizental" refresh={true}>
+            {/* categoryDom 宽度在初始化时已计算出,否则不能滚动 */}
             <div ref={Category}>
                 <List>
                     <span>{title}</span>

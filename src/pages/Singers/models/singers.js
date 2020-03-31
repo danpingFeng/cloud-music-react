@@ -20,6 +20,10 @@ export default {
                 type: 'saveSingersList',
                 payload: Array.isArray(response.artists) ? response.artists : []
             });
+            yield put({
+                type: 'setPullDownLoading',
+                payload: false
+            })
         },
 
         *fetchSingersList({payload}, {call, put}) {
@@ -29,6 +33,10 @@ export default {
                 type: 'saveSingersList',
                 payload: Array.isArray(response.artists) ? response.artists : []
             })
+            yield put({
+                type: 'setPullDownLoading',
+                payload: false
+            })
         },
 
         *fetchMoreHotSingersList({payload}, {call, put}) {
@@ -37,6 +45,10 @@ export default {
                 type: 'saveMoreSingersList',
                 payload: Array.isArray(response.artists) ? response.artists : []
             });
+            yield put({
+                type: 'setPullUpLoading',
+                payload: false
+            })
         },
 
         *fetchMoreSingersList({payload}, {call, put}) {
@@ -45,6 +57,10 @@ export default {
             yield put({
                 type: 'saveMoreSingersList',
                 payload: Array.isArray(response.artists) ? response.artists : []
+            })
+            yield put({
+                type: 'setPullUpLoading',
+                payload: false
             })
         },
 
@@ -76,10 +92,12 @@ export default {
             return {...state}
         },
         setPullUpLoading(state, action) {
+            console.log('setPullUpLoading', action.payload);
             state.pullUpLoading = action.payload;
             return {...state}
         },
         setPullDownLoading(state, action) {
+            console.log('setPullDownLoading', action.payload);
             state.pullDownLoading = action.payload;
             return {...state}
         },

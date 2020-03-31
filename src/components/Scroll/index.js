@@ -40,6 +40,7 @@ const Scroll = forwardRef((props, ref) => {
     const scrollContaninerRef = useRef();
     const {direction, click, refresh, pullUpLoading, pullDownLoading, bounceTop, bounceBottom} = props;
 
+    console.log('scroll', pullUpLoading);
     // 上拉加载、下拉刷新 和 滚动请求 的函数
     const {pullUp, pullDown, onScroll} = props;
 
@@ -144,6 +145,7 @@ const Scroll = forwardRef((props, ref) => {
 
             {/* 滑到底部加载动画 */}
             <PullUpLoading style={PullUpdisplayStyle}><Loading></Loading></PullUpLoading>
+
             {/* 顶部下拉刷新动画 */}
             <PullDownLoading style={PullDowndisplayStyle}><Loading2></Loading2></PullDownLoading>
 

@@ -3,7 +3,7 @@ import Horizen from '@/components/horizen-item';
 import {categoryTypes, alphaTypes} from '@/config/index';
 import {NavContainer, ListContainer, List, ListItem} from './style';
 import {connect} from 'dva';
-import Loading from '@/components/loading';
+import Loading from '@/components/loading-v3';
 import LazyLoad, {forceCheck} from 'react-lazyload';
 import router from 'umi/router';
 
@@ -11,28 +11,22 @@ const Scroll = React.lazy(() => import('@/components/scroll'));
 
 function Singers({dispatch, singers}) {
     const scrollRef = useRef(null);
-
     useEffect(() => {
         // 避免重复请求
         if (!singers.singersList.length) {
-            // 请求热门歌手列表
+            // 默认请求热门歌手列表
             dispatch({
                 type: 'singers/fetchHotSingersList',
                 payload: 0
             })
         }
-
-        // 请求全部歌手列表
-        // dispatch({
-        //     type: 'singers/fetchSingersList',
-        //     payload: {category: singers.category, alpha: singers.alpha, listOffset: 0}
-        // })
     }, []);
 
-    // 滑到最底部刷新部分的处理
+    // 上拉加载
     const handlePullUp = () => {
         dispatch({
-            type: 'singers/setPullUpLoading'
+            type: 'singers/setPullUpLoading',
+            payload: true
         });
         const {category, alpha, listOffset} = singers;
 
@@ -52,7 +46,8 @@ function Singers({dispatch, singers}) {
     // 顶部下拉刷新
     const handlePullDown = () => {
         dispatch({
-            type: 'singers/setPullDownLoading'
+            type: 'singers/setPullDownLoading',
+            payload: true
         });
 
         dispatch({
@@ -69,7 +64,7 @@ function Singers({dispatch, singers}) {
         } else {
             const {category, alpha, listOffset} = singers;
             dispatch({
-                type: 'singers/fetchMoreSingersList',
+                type: 'singers/fetchSingersList',
                 payload: {category, alpha, listOffset}
             })
         }
@@ -155,11 +150,12 @@ function Singers({dispatch, singers}) {
     }
 
     return (
-        // NavContainer 用于包裹 better-scroll,且尺寸必须确定
+        //  NavContainer，scroll外部容器的宽度要设定, 设置为100%
         <NavContainer>
             <Horizen list={categoryTypes} title={"分类(默认热门):"} handleClick={val => handleUpdateCategory(val)} oldVal={singers.category} ></Horizen>
             <Horizen list={alphaTypes} title={"首字母:"} handleClick={val => handleUpdateAlpha(val)} oldVal={singers.alpha} ></Horizen>
 
+            {/* ListContainer fixed定位 top+bottom 限定Srcoll外部容器的高度 */}
             <ListContainer>
                 <Suspense fallback={<Loading />}>
                     <Scroll
@@ -167,8 +163,8 @@ function Singers({dispatch, singers}) {
                         pullUp={handlePullUp}
                         pullDown={handlePullDown}
                         ref={scrollRef}
-                    // pullUpLoading={singers.pullUpLoading}
-                    // pullDownLoading={singers.pullDownLoading}
+                        pullUpLoading={singers.pullUpLoading}
+                        pullDownLoading={singers.pullDownLoading}
                     >
                         {
                             renderSingerList()

@@ -14,6 +14,7 @@ export const ListContainer = styled.div`
     position: fixed;
     top: 160px;
     left: 0;
+    // bottom 非常重要，注释的话滚动不起来，fixed定位 top+bottom 限定Srcoll外部容器的高度
     bottom: 0;
     overflow: hidden;
     width: 100%;
