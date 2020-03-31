@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect, Suspense, useCallback} from 'react';
-import {Container, TopDesc, Menu, SongList, SongItem} from './style';
+import {Container, TopDesc, Menu, SongList, SongItem, BgLayer} from './style';
 import {connect} from 'dva';
 import {CSSTransition} from 'react-transition-group';
 import Header from '@/components/header';
@@ -47,12 +47,21 @@ function Album(props) {
     const handleScroll = useCallback((pos) => {
         let minScrollY = -HEADER_HEIGHT;
         let percent = Math.abs(pos.y / minScrollY);
+
+        // headerEl 通过forwardRef传入子组件，获取子组件dom
         let headerDom = headerEl.current;
+
         // 滑过顶部的高度开始变化,当向上移动超过header头部的时候，滚动
         if (pos.y < minScrollY) {
             headerDom.style.backgroundColor = style["theme-color"];
+
+            // 随着顶部滚动的高度的变化，透明度慢慢变为1
             headerDom.style.opacity = Math.min(1, (percent - 1) / 2);
+
+            // 切换标题
             setTitle(currentAlbum.name);
+
+            // 跑马灯滚动效果
             setIsMarquee(true);
         } else {
             headerDom.style.backgroundColor = "";
@@ -62,7 +71,7 @@ function Album(props) {
         }
     }, [currentAlbum]);
 
-    // 依赖不变的时候 把持一样的函数引用
+    // 依赖不变的时候 保持一样的函数引用
     const handleBack = useCallback(() => {
         setShowStatus(false);
     }, []);
@@ -76,6 +85,7 @@ function Album(props) {
         return (
             <TopDesc background={currentAlbum.coverImgUrl}>
                 <div className="background">
+                    {/* filter的作用：加了个蒙层,对图片的色调进行修饰 */}
                     <div className="filter"></div>
                 </div>
                 <div className="img_wrapper">
@@ -146,12 +156,12 @@ function Album(props) {
 
     return (
         <CSSTransition
-            in={showStatus}
-            timeout={300}
-            classNames="fly"
+            in={showStatus} // 如果this.state.show从false变为true，则动画入场，反之out出场
+            timeout={300}  // 动画执行300ms
+            classNames="fly" ////自定义的class名
             appear={true}
-            unmountOnExit
-            onExited={props.history.goBack}
+            unmountOnExit //可选，当动画出场后在页面上移除包裹的dom节点
+            onExited={props.history.goBack} //动画出场之后的回调
         >
             <Container>
                 <Header ref={headerEl} title={title} handleClick={handleBack} isMarquee={isMarquee} ></Header>

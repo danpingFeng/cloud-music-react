@@ -92,12 +92,10 @@ export default {
             return {...state}
         },
         setPullUpLoading(state, action) {
-            console.log('setPullUpLoading', action.payload);
             state.pullUpLoading = action.payload;
             return {...state}
         },
         setPullDownLoading(state, action) {
-            console.log('setPullDownLoading', action.payload);
             state.pullDownLoading = action.payload;
             return {...state}
         },

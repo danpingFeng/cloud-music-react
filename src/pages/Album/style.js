@@ -16,7 +16,7 @@ export const Container = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    widthL 100%;
+    width: 100%;
     z-index: 100;
     overflow: hidden;
     background: #f2f3f4;
@@ -50,6 +50,7 @@ export const TopDesc = styled.div`
   width: 100%;
   height: 275px;
   position: relative;
+
   .background {
     z-index: -1;
     background: url(${props => props.background}) no-repeat;
@@ -248,3 +249,13 @@ export const SongItem = styled.ul`
     }
   }
 `
+export const BgLayer = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  z-index: 50;
+`
+

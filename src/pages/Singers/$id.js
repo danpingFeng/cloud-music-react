@@ -8,6 +8,7 @@ import SongList from '@/components/songList';
 import IconFont from '@/assets/IconFont';
 import {HEADER_HEIGHT} from '@/config/index';
 
+// 歌手页面
 function Singer(props) {
 
     const {dispatch, singerInfo} = props;
@@ -27,6 +28,7 @@ function Singer(props) {
     }
 
     useEffect(() => {
+        // fetch歌手信息
         dispatch({
             type: 'singerInfo/fetchSingerInfo',
             payload: props.match.params.id

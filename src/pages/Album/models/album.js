@@ -9,7 +9,6 @@ export default {
     effects: {
         *fetchAlbumDetail({payload}, {call, put}) {
             const response = yield call(getAlbumDetailRequest, payload);
-
             yield put({
                 type: 'saveAlbumDetail',
                 payload: response.playlist
