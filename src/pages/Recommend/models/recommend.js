@@ -1,4 +1,3 @@
-
 import {getBannerList, getRecommendList} from '@/services/recommend';
 
 export default {
