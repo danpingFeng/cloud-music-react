@@ -55,18 +55,14 @@ function Rank({dispatch, rank}) {
         <Container>
             <Suspense fallback={<Loading />}>
                 <Scroll>
-                    {
+                    <div>
+                        <Player></Player>
+                        <h1 className="offical"> 官方榜 </h1>
+                        {renderRankList(rank.officalList)}
 
-                        <div>
-                            <Player></Player>
-                            <h1 className="offical"> 官方榜 </h1>
-                            {renderRankList(rank.officalList)}
-
-                            <h1 className="global"> 全球榜 </h1>
-                            {renderRankList(rank.globalList, true)}
-                        </div>
-                    }
-
+                        <h1 className="global"> 全球榜 </h1>
+                        {renderRankList(rank.globalList, true)}
+                    </div>
                 </Scroll>
             </Suspense>
         </Container>
